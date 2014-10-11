@@ -14,7 +14,6 @@
         <activity
             android:name="com.garbagecollector.android.AndroidLauncher"
             android:label="@string/app_name" 
-            android:screenOrientation="landscape"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
