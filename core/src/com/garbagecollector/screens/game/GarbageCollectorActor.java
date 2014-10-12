@@ -27,7 +27,7 @@ public class GarbageCollectorActor extends Actor {
 
     public GarbageCollectorActor(GarbageType type) {
         this.type = type;
-        Texture texture = new Texture(Gdx.files.internal("bucket_black.png"));
+        Texture texture = new Texture(Gdx.files.internal("bucket_yellow.png"));
         bucketImage = new TextureRegion(texture);
         setName(NAME);
     }
