@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.garbagecollector.GarbageCollector;
 
 import java.util.Random;
 
@@ -40,11 +41,30 @@ public class GarbageActor extends Actor{
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (getY() + getHeight() < 0){
+        if (detectFall()){
             remove();
             System.out.println("Removing garbage: " + this);
+        } else if(detectCollision()) {
+            remove();
+        } else moveDown();
+    }
+
+    private boolean detectCollision() {
+        GarbageCollector bucket = getStage().getRoot().findActor(GarbageCollector.NAME);
+        boolean inBucketX =  getX() > bucket.getX()  &&  getRight() < bucket.getRight();
+        if (bucket.getTop() >= getY() && inBucketX){
+            System.out.println("collision!");
+            return true;
         }
-        else addAction(Actions.moveBy(0, -getStage().getHeight()/ SPEED));
+        return false;
+    }
+
+    private void moveDown() {
+        addAction(Actions.moveBy(0, -getStage().getHeight() / SPEED));
+    }
+
+    private boolean detectFall() {
+        return getY() + getHeight() < 0;
     }
 
 }
