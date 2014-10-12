@@ -1,7 +1,6 @@
 package com.garbagecollector;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  */
 public class GarbageCollector extends Actor {
 
-    public static final float ACCELERATION_MULTIPLIER = 8f;
+    public static final float ACCELERATION_MULTIPLIER = 4f;
+    private static final float ACCELERATION_DURATION_MULTIPLIER = 4f;
     private TextureRegion bucketImage;
     private GarbageType type;
 
@@ -43,7 +43,7 @@ public class GarbageCollector extends Actor {
         float accelerometerDelta = isPortrait ? Gdx.input.getAccelerometerX(): Gdx.input.getAccelerometerY();
         System.out.println("accelerometerX:  " + accelerometerDelta+", delta: "+delta);
         //calculating new position of bucket
-        float posDelta = accelerometerDelta * Gdx.graphics.getDensity();
+        float posDelta = accelerometerDelta *ACCELERATION_MULTIPLIER* Gdx.graphics.getDensity();
         float newPos = isPortrait?(getX() - posDelta): (getX() + posDelta);
         float maxPoint = getStage().getWidth() - getWidth();
 
@@ -51,7 +51,7 @@ public class GarbageCollector extends Actor {
         if (newPos < 0) newPos = 0;
         else if (newPos > maxPoint) newPos = maxPoint;
 
-        addAction(Actions.moveTo(newPos, 0, delta* ACCELERATION_MULTIPLIER, Interpolation.bounce));
+        addAction(Actions.moveTo(newPos, 0, delta* ACCELERATION_DURATION_MULTIPLIER, Interpolation.bounce));
 
         super.act(delta);
     }
