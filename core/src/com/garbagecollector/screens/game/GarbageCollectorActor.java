@@ -86,6 +86,10 @@ public class GarbageCollectorActor extends Actor {
     }
 
     public void onCatchGarbage(GarbageActor actor){
-
+        if (actor.getGarbageType().equals(type)) {
+            ((GameStage) getStage()).getGameScreen().getState().incScore();
+            ScoreUpdatedEvent event = new ScoreUpdatedEvent();
+            fire(event);
+        }
     }
 }

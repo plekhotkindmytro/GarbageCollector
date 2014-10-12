@@ -18,7 +18,7 @@ import com.garbagecollector.screens.game.ScoreUpdatedEvent;
 public class GarbageActor extends Actor{
 
     public static final int SPEED = 200;
-    public static final int HEAP_SPEED = 200;
+    public static final int HEAP_SPEED = 50;
     TextureRegion texture;
     private final GarbageType type;
 
@@ -58,9 +58,6 @@ public class GarbageActor extends Actor{
 
             remove();
         } else if(detectCollision()) {
-            ((GameStage)getStage()).getGameScreen().getState().incScore();
-            ScoreUpdatedEvent event = new ScoreUpdatedEvent();
-            fire(event);
             System.out.println("Garbage type in collision: "+type);
             if(type.equals(GarbageType.CAT)) {
                 Group root = getStage().getRoot();
@@ -68,6 +65,9 @@ public class GarbageActor extends Actor{
                 fatality.addAction(Actions.sequence(Actions.fadeIn(100.5f),Actions.fadeOut(1)));
 
             }
+
+            GarbageCollectorActor actor = getStage().getRoot().findActor(GarbageCollectorActor.NAME);
+            actor.onCatchGarbage(this);
 
             remove();
         } else moveDown();
