@@ -69,14 +69,8 @@ public class GarbageActor extends Actor{
             if(type.equals(GarbageType.CAT)) {
                 Group root = getStage().getRoot();
                 Actor fatality = root.findActor("fatalityActor");
-                if(!fatality.isVisible()) {
-                    fatality.setVisible(true);
 
-                } else {
-
-                }
-
-                fatality.addAction(Actions.sequence( Actions.fadeOut(0.5f)));
+                fatality.addAction(Actions.sequence( Actions.show(),Actions.delay(0.5f), Actions.hide()));
                 ((FatalityActor)fatality).playMusic();
             }
 
