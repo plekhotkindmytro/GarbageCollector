@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.garbagecollector.screens.game.GameStage;
 import com.garbagecollector.screens.game.GarbageCollectorActor;
+import com.garbagecollector.screens.game.ScoreUpdatedEvent;
 
 /**
  * Created by dmytroplekhotkin on 10/12/14.
@@ -19,7 +21,6 @@ public class GarbageActor extends Actor{
     public static final int HEAP_SPEED = 20;
     TextureRegion texture;
     private final GarbageType type;
-
 
     public GarbageActor() {
         type = GarbageType.randomGarbage();
@@ -45,12 +46,28 @@ public class GarbageActor extends Actor{
         if (detectFall()){
             Group root = getStage().getRoot();
             Actor actor = root.findActor("garbageHeap");
-            actor.addAction(Actions.moveBy(0, HEAP_SPEED,1));
+            if(!type.equals(GarbageType.CAT)) {
+                actor.addAction(Actions.moveBy(0, HEAP_SPEED, 1));
+                //incrementing dropCount
+                ((GameStage)getStage()).getGameScreen().getState().incDrop();
+            } else {
+                if(!type.equals(GarbageType.CAT)) {
+                    Actor fatality = root.findActor("fatalityActor");
+                    fatality.addAction(Actions.fadeIn(0.5f));
+                    fatality.addAction(Actions.fadeOut(1));
+                }
+            }
+
+            System.out.println("Removing garbage: " + this);
+            ScoreUpdatedEvent event = new ScoreUpdatedEvent();
+            fire(event);
 
             remove();
-            System.out.println("Removing garbage: " + this);
-
         } else if(detectCollision()) {
+            ((GameStage)getStage()).getGameScreen().getState().incScore();
+            ScoreUpdatedEvent event = new ScoreUpdatedEvent();
+            fire(event);
+
             remove();
         } else moveDown();
     }

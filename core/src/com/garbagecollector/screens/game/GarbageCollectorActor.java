@@ -26,20 +26,24 @@ public class GarbageCollectorActor extends Actor {
     private GarbageType type;
 
     public GarbageCollectorActor(GarbageType type) {
+        switchType(type);
+        setName(NAME);
+    }
+
+    public void switchType(GarbageType type) {
         this.type = type;
         String image;
         switch (type) {
             case PAPER:
-            image = "bucket_blue.png";
+            image = "bucket_yellow.png";
                 break;
             case DANGER:
+                image = "bucket_red.png";
+                break;
             case PLASTICS:
-            image = "bucket_red.png";
+            image = "bucket_blue.png";
                 break;
             case OTHER:
-                image = "bucket_yellow.png";
-                break;
-            case CAT:
                 image = "bucket_green.png";
                 break;
             default:
@@ -48,7 +52,6 @@ public class GarbageCollectorActor extends Actor {
         }
         Texture texture = new Texture(Gdx.files.internal(image));
         bucketImage = new TextureRegion(texture);
-        setName(NAME);
     }
 
     public GarbageType getType() {
