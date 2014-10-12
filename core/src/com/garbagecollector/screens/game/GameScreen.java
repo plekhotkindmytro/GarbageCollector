@@ -12,8 +12,6 @@ import com.garbagecollector.GarbageCollector;
 import com.garbagecollector.garbage.GarbageActor;
 import com.garbagecollector.garbage.GarbageType;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Alexander Semenov

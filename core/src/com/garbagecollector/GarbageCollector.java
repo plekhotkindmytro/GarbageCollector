@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.garbagecollector.garbage.GarbageActor;
 import com.garbagecollector.garbage.GarbageType;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
@@ -17,6 +18,10 @@ public class GarbageCollector extends Actor {
 
     public static final float ACCELERATION_MULTIPLIER = 4f;
     private static final float ACCELERATION_DURATION_MULTIPLIER = 4f;
+    /**
+     * Name needed to find bucket in stage
+     */
+    public static final String NAME = "collector";
     private TextureRegion bucketImage;
     private GarbageType type;
 
@@ -24,6 +29,7 @@ public class GarbageCollector extends Actor {
         this.type = type;
         Texture texture = new Texture(Gdx.files.internal("bucket_black.png"));
         bucketImage = new TextureRegion(texture);
+        setName(NAME);
     }
 
     public GarbageType getType() {
@@ -55,5 +61,9 @@ public class GarbageCollector extends Actor {
         addAction(Actions.moveTo(newPos, 0, delta* ACCELERATION_DURATION_MULTIPLIER, Interpolation.bounce));
 
         super.act(delta);
+    }
+
+    public void onCatchGarbage(GarbageActor actor){
+
     }
 }
