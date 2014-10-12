@@ -13,19 +13,13 @@ import java.util.Random;
  * Created by dmytroplekhotkin on 10/12/14.
  */
 public class FatalityActor extends Actor{
-    public static final int CITY_COUNT = 7;
+
     TextureRegion texture;
 
 
     public FatalityActor() {
         texture = new TextureRegion(new Texture(Gdx.files.internal("fatality.png")));
-        float scaleXY = getScale();
-        setPosition(-getWidth()*scaleXY, -getHeight()*scaleXY);
-    }
-
-    private float getScale() {
-        int screenWidth = Gdx.graphics.getWidth();
-        return (screenWidth/getWidth());
+        setSize(texture.getRegionWidth()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
     }
 
     @Override

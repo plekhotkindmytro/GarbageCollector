@@ -50,12 +50,6 @@ public class GarbageActor extends Actor{
                 actor.addAction(Actions.moveBy(0, HEAP_SPEED, 1));
                 //incrementing dropCount
                 ((GameStage)getStage()).getGameScreen().getState().incDrop();
-            } else {
-                if(!type.equals(GarbageType.CAT)) {
-                    Actor fatality = root.findActor("fatalityActor");
-                    fatality.addAction(Actions.fadeIn(0.5f));
-                    fatality.addAction(Actions.fadeOut(1));
-                }
             }
 
             System.out.println("Removing garbage: " + this);
@@ -67,6 +61,13 @@ public class GarbageActor extends Actor{
             ((GameStage)getStage()).getGameScreen().getState().incScore();
             ScoreUpdatedEvent event = new ScoreUpdatedEvent();
             fire(event);
+            System.out.println("Garbage type in collision: "+type);
+            if(type.equals(GarbageType.CAT)) {
+                Group root = getStage().getRoot();
+                Actor fatality = root.findActor("fatalityActor");
+                fatality.addAction(Actions.sequence(Actions.fadeIn(100.5f),Actions.fadeOut(1)));
+
+            }
 
             remove();
         } else moveDown();

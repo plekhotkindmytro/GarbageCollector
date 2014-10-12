@@ -80,10 +80,10 @@ public class GameScreen implements Screen {
     private void initFatalityActor() {
         fatalityActor = new FatalityActor();
         fatalityActor.setName("fatalityActor");
-        fatalityActor.setVisible(false);
+
         stage.addActor(fatalityActor);
         fatalityActor.setPosition( stage.getWidth() - fatalityActor.getWidth(), 0);
-
+        fatalityActor.setVisible(false);
     }
 
     private void initButton(final GarbageType type, ImageButton bucket, String image, float xPos) {
