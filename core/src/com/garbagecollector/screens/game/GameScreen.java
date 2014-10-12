@@ -153,8 +153,9 @@ public class GameScreen implements Screen {
         //bucket
         collector = new GarbageCollectorActor(GarbageType.PAPER);
         float density = Gdx.graphics.getDensity();
-        collector.setSize(50f * density, 50f * density);
+        collector.setSize(60f * density, 60f * density);
         collector.setX(stage.getWidth() / 2 - collector.getWidth() / 2);
+        collector.setY(60f * density);
 
         stage.addActor(collector);
     }

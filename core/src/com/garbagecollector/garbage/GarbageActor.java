@@ -61,10 +61,7 @@ public class GarbageActor extends Actor{
             fire(event);
 
             remove();
-        } else if(detectCollision()) {
-            ((GameStage)getStage()).getGameScreen().getState().incScore();
-            ScoreUpdatedEvent event = new ScoreUpdatedEvent();
-            fire(event);
+          } else if(detectCollision()) {
             System.out.println("Garbage type in collision: " + type);
             if(type.equals(GarbageType.CAT)) {
                 Group root = getStage().getRoot();
