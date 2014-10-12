@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
     private GarbageHeapActor garbageHeapActor;
 
     private GameStage stage;
+    private FinalMenuStage finalStage;
     private GarbageCollectorActor collector;
     private long lastDropTime;
     private Label scoreLabel;
@@ -70,8 +71,27 @@ public class GameScreen implements Screen {
         initButton(GarbageType.DANGER,redBucket,"bucket_red.png", 2*buttonPos);
         initButton(GarbageType.PAPER,yellowBucket,"bucket_yellow.png", 3*buttonPos);
 
+
         initScoreText();
         initFatalityActor();
+       
+        stage.addCaptureListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                System.out.println("Handle:  "+event);
+                if (event instanceof ScoreUpdatedEvent){
+                    scoreLabel.setText("Score: "+state.getScoreCount());
+                    return true;
+                } else if (event instanceof GameFinishEvent){
+                    finishGame = true;
+                    Gdx.input.setInputProcessor(finalStage);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        finalStage = new FinalMenuStage(new ScreenViewport(), this);
 
     }
 
@@ -105,28 +125,14 @@ public class GameScreen implements Screen {
         stage.addActor(bucket);
     }
 
+
+    
     private void initScoreText() {
-//        WidgetGroup textGroup = new WidgetGroup();
-//        textGroup.setSize(20, 100);
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = new BitmapFont();
         scoreLabel = new Label("Score: 0", style);
-        scoreLabel.setFontScale(3f);
-        scoreLabel.setScale(3f);
-        stage.addCaptureListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                System.out.println("Handle:  "+event);
-                if (event instanceof ScoreUpdatedEvent){
-                    scoreLabel.setText("Score: "+state.getScoreCount());
-                    return true;
-                } else if (event instanceof GameFinishEvent){
-                    finishGame = true;
-                    return true;
-                }
-                return false;
-            }
-        });
+        scoreLabel.setFontScale(1.5f * Gdx.graphics.getDensity());
+        scoreLabel.setScale(1.5f*Gdx.graphics.getDensity());
         scoreLabel.setPosition(20, stage.getHeight()-scoreLabel.getHeight()*scoreLabel.getScaleY());
         stage.addActor(scoreLabel);
     }
@@ -148,7 +154,7 @@ public class GameScreen implements Screen {
         collector = new GarbageCollectorActor(GarbageType.PAPER);
         float density = Gdx.graphics.getDensity();
         collector.setSize(50f * density, 50f * density);
-        collector.setX(Gdx.graphics.getWidth() / 2 - collector.getWidth() / 2);
+        collector.setX(stage.getWidth() / 2 - collector.getWidth() / 2);
 
         stage.addActor(collector);
     }
@@ -159,6 +165,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
       renderMainStage();
+        if (finishGame) renderFinalMenu();
+
+    }
+
+    private void renderFinalMenu() {
+        finalStage.act();
+        finalStage.draw();
     }
 
     private void renderMainStage() {
@@ -206,5 +219,11 @@ public class GameScreen implements Screen {
     public void dispose() {
         stage.dispose();
         game.dispose();
+    }
+
+    public void restart() {
+        state.resetGame();
+        finishGame = false;
+        Gdx.input.setInputProcessor(stage);
     }
 }
