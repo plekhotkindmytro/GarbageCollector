@@ -9,10 +9,9 @@ import java.util.Random;
  * @author Alexander Semenov
  */
 public enum GarbageType {
-    PAPER("paper1.png", "paper2.png","paper3.png", "paper4.png"),
-    PLASTICS("plastics1.png", "plastics2.png","plastics3.png", "plastics4.png", "plastics5.png"),
-    GLASS("glass1.png"),
-    DANGER("danger1.png","danger2.png");
+    PAPER("p1.png", "p2.png","p3.png", "p4.png"),
+    PLASTICS("pl1.png", "pl2.png","pl3.png"),
+    DANGER("d1.png");
 
     private final String[] images;
     private GarbageType(final String... images) {

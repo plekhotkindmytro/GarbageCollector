@@ -18,14 +18,14 @@ import java.util.Random;
  */
 public class GarbageActor extends Actor{
 
-    public static final int SPEED = 500;
+    public static final int SPEED = 200;
     TextureRegion texture;
 
     public GarbageActor() {
 
 
         texture = new TextureRegion(new Texture(Gdx.files.internal(GarbageType.randomGarbage())));
-        setSize(40*Gdx.graphics.getDensity(), 40*Gdx.graphics.getDensity());
+        setSize(texture.getRegionWidth()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
     }
 
     @Override
