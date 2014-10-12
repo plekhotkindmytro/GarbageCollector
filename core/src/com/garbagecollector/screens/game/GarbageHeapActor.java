@@ -1,5 +1,6 @@
 package com.garbagecollector.screens.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,6 +53,7 @@ public class GarbageHeapActor extends Actor {
     }
 
     private boolean detectOverflow() {
-        return getStage().getHeight() - getTop()*getScaleY() < 300 * Gdx.graphics.getDensity();
+        int finish = Gdx.app.getType() == Application.ApplicationType.iOS? 100 : 300;
+        return getStage().getHeight() - getTop()*getScaleY() < finish * Gdx.graphics.getDensity();
     }
 }

@@ -14,6 +14,10 @@ public class EcoGarbageCollector extends Game {
         setScreen(new GameScreen(this));
     }
 
+    public void restartGame(){
+        setScreen(new GameScreen(this));
+    }
+
 
 
 }

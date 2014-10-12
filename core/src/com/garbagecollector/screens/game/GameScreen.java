@@ -223,10 +223,11 @@ public class GameScreen implements Screen {
     }
 
     public void restart() {
-        state.resetGame();
-        finishGame = false;
-        scoreLabel.setText("Score: 0");
-        garbageHeapActor.setY(-garbageHeapActor.getHeight());
-        Gdx.input.setInputProcessor(stage);
+        game.restartGame();
+//        state.resetGame();
+//        finishGame = false;
+//        scoreLabel.setText("Score: 0");
+//        garbageHeapActor.setY(-garbageHeapActor.getHeight());
+//        Gdx.input.setInputProcessor(stage);
     }
 }
