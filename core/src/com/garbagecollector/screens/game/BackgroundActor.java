@@ -6,15 +6,19 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.Random;
+
 /**
  * @author Alexander Semenov
  */
 public class BackgroundActor extends Actor {
 
+    public static final int CITY_COUNT = 7;
     TextureRegion texture;
 
+    private static final Random random = new Random();
     public BackgroundActor() {
-        texture = new TextureRegion(new Texture(Gdx.files.internal("city4.jpg")));
+        texture = new TextureRegion(new Texture(Gdx.files.internal("city"+1+random.nextInt(CITY_COUNT)+".jpg")));
     }
 
     @Override
