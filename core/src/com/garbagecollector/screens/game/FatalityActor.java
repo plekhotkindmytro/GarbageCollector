@@ -1,6 +1,7 @@
 package com.garbagecollector.screens.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,12 +15,18 @@ import java.util.Random;
  */
 public class FatalityActor extends Actor{
 
+    private Music fatality;
     TextureRegion texture;
 
 
     public FatalityActor() {
         texture = new TextureRegion(new Texture(Gdx.files.internal("fatality.png")));
         setSize(texture.getRegionWidth()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
+        fatality = Gdx.audio.newMusic(Gdx.files.internal("fatality.mp3"));
+    }
+
+    public void playMusic() {
+        fatality.play();
     }
 
     @Override

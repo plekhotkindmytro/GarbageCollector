@@ -1,6 +1,7 @@
 package com.garbagecollector.garbage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.garbagecollector.screens.game.FatalityActor;
 import com.garbagecollector.screens.game.GameStage;
 import com.garbagecollector.screens.game.GarbageCollectorActor;
 import com.garbagecollector.screens.game.ScoreUpdatedEvent;
@@ -17,12 +19,14 @@ import com.garbagecollector.screens.game.ScoreUpdatedEvent;
  */
 public class GarbageActor extends Actor{
 
+
     public static final int SPEED = 200;
     public static final int HEAP_SPEED = 200;
     TextureRegion texture;
     private final GarbageType type;
 
     public GarbageActor() {
+
         type = GarbageType.randomGarbage();
         texture = new TextureRegion(new Texture(Gdx.files.internal(GarbageType.randomImageByType(type))));
         setSize(texture.getRegionWidth()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
@@ -61,12 +65,18 @@ public class GarbageActor extends Actor{
             ((GameStage)getStage()).getGameScreen().getState().incScore();
             ScoreUpdatedEvent event = new ScoreUpdatedEvent();
             fire(event);
-            System.out.println("Garbage type in collision: "+type);
+            System.out.println("Garbage type in collision: " + type);
             if(type.equals(GarbageType.CAT)) {
                 Group root = getStage().getRoot();
                 Actor fatality = root.findActor("fatalityActor");
-                fatality.addAction(Actions.sequence(Actions.fadeIn(100.5f),Actions.fadeOut(1)));
+                if(!fatality.isVisible()) {
+                    fatality.setVisible(true);
 
+                } else {
+
+                }
+                fatality.addAction(Actions.sequence( Actions.fadeOut(0.5f)));
+                ((FatalityActor)fatality).playMusic();
             }
 
             remove();
