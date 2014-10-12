@@ -20,10 +20,12 @@ public class GarbageActor extends Actor{
 
     public static final int SPEED = 500;
     TextureRegion texture;
+//    final GarbageType type;
 
     public GarbageActor() {
 
 
+//        type = GarbageType.randomGarbage();
         texture = new TextureRegion(new Texture(Gdx.files.internal(GarbageType.randomGarbage())));
         setSize(40*Gdx.graphics.getDensity(), 40*Gdx.graphics.getDensity());
     }
@@ -37,8 +39,12 @@ public class GarbageActor extends Actor{
     }
     @Override
     public void act(float delta) {
-        addAction(Actions.moveBy(0, -getStage().getHeight()/ SPEED));
         super.act(delta);
+        if (getY() + getHeight() < 0){
+            remove();
+            System.out.println("Removing garbage: " + this);
+        }
+        else addAction(Actions.moveBy(0, -getStage().getHeight()/ SPEED));
     }
 
 }

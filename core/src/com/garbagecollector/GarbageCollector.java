@@ -42,7 +42,7 @@ public class GarbageCollector extends Actor {
     public void act(float delta) {
         boolean isPortrait = Gdx.graphics.getHeight() > Gdx.graphics.getWidth();
         float accelerometerDelta = isPortrait ? Gdx.input.getAccelerometerX(): Gdx.input.getAccelerometerY();
-        System.out.println("accelerometerX:  " + accelerometerDelta+", delta: "+delta);
+//        System.out.println("accelerometerX:  " + accelerometerDelta+", delta: "+delta);
         //calculating new position of bucket
         float posDelta = accelerometerDelta *ACCELERATION_MULTIPLIER* Gdx.graphics.getDensity();
         float newPos = isPortrait?(getX() - posDelta): (getX() + posDelta);
