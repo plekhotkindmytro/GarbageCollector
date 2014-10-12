@@ -18,7 +18,7 @@ import com.garbagecollector.screens.game.ScoreUpdatedEvent;
 public class GarbageActor extends Actor{
 
     public static final int SPEED = 200;
-    public static final int HEAP_SPEED = 20;
+    public static final int HEAP_SPEED = 200;
     TextureRegion texture;
 //    final GarbageType type;
 
