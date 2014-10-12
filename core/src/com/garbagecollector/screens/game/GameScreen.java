@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.garbagecollector.EcoGarbageCollector;
@@ -43,6 +44,7 @@ public class GameScreen implements Screen {
     private GarbageCollectorActor collector;
     private long lastDropTime;
     private Label scoreLabel;
+    boolean finishGame = false;
 
     // Buttons
     private ImageButton redBucket;
@@ -118,6 +120,9 @@ public class GameScreen implements Screen {
                 if (event instanceof ScoreUpdatedEvent){
                     scoreLabel.setText("Score: "+state.getScoreCount());
                     return true;
+                } else if (event instanceof GameFinishEvent){
+                    finishGame = true;
+                    return true;
                 }
                 return false;
             }
@@ -153,6 +158,10 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+      renderMainStage();
+    }
+
+    private void renderMainStage() {
         if(TimeUtils.millis() - lastDropTime > SPAWN_RATE) {
             GarbageActor actor = new GarbageActor();
             stage.addActor(actor);
@@ -163,7 +172,7 @@ public class GameScreen implements Screen {
         }
 
 
-        stage.act(Gdx.graphics.getDeltaTime());
+        if (!finishGame) stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 

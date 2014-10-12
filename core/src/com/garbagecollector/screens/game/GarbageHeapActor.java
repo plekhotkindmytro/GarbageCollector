@@ -45,5 +45,13 @@ public class GarbageHeapActor extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (detectOverflow()){
+            getStage().getRoot().fire(new GameFinishEvent());
+        }
+
+    }
+
+    private boolean detectOverflow() {
+        return getStage().getHeight() - getTop()*getScaleY() < 200 * Gdx.graphics.getDensity();
     }
 }
