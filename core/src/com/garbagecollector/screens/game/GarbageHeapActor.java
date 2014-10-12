@@ -17,7 +17,8 @@ public class GarbageHeapActor extends Actor {
     private int position;
     public GarbageHeapActor() {
         texture = new TextureRegion(new Texture(Gdx.files.internal("garbage.png")));
-        setSize(texture.getRegionWidth(), texture.getRegionHeight());
+        //TODO get width from stage, not from screen
+        setSize(Gdx.graphics.getWidth(), texture.getRegionHeight());
         setPosition(0, -texture.getRegionHeight());
         setName("garbageHeap");
     }

@@ -1,4 +1,4 @@
-package com.garbagecollector;
+package com.garbagecollector.screens.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 /**
  * @author Alexander Semenov
  */
-public class GarbageCollector extends Actor {
+public class GarbageCollectorActor extends Actor {
 
     public static final float ACCELERATION_MULTIPLIER = 4f;
     private static final float ACCELERATION_DURATION_MULTIPLIER = 4f;
@@ -25,7 +25,7 @@ public class GarbageCollector extends Actor {
     private TextureRegion bucketImage;
     private GarbageType type;
 
-    public GarbageCollector(GarbageType type) {
+    public GarbageCollectorActor(GarbageType type) {
         this.type = type;
         Texture texture = new Texture(Gdx.files.internal("bucket_black.png"));
         bucketImage = new TextureRegion(texture);

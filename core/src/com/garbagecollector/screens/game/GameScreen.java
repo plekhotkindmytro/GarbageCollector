@@ -5,10 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.garbagecollector.EcoGarbageCollector;
-import com.garbagecollector.GarbageCollector;
 import com.garbagecollector.garbage.GarbageActor;
 import com.garbagecollector.garbage.GarbageType;
 
@@ -20,13 +20,15 @@ public class GameScreen implements Screen {
 
     public static final int SPAWN_RATE = 3000;
     final EcoGarbageCollector game;
+    final GameState state = new GameState();
 
     private BackgroundActor backgroundActor;
     private GarbageHeapActor garbageHeapActor;
 
     private Stage stage;
-    private GarbageCollector collector;
+    private GarbageCollectorActor collector;
     private long lastDropTime;
+    private Label scoreLabel;
 
     public GameScreen(final EcoGarbageCollector game) {
         this.game = game;
@@ -36,6 +38,19 @@ public class GameScreen implements Screen {
         initBackground();
         initGarbageHeap();
         initBucket();
+
+
+        initScoreText();
+    }
+
+    private void initScoreText() {
+  /*      WidgetGroup textGroup = new WidgetGroup();
+//        textGroup.setSize();
+        Skin skin = new Skin();
+        scoreLabel = new Label("Score: ", skin);
+
+        scoreLabel.setPosition(0, stage.getHeight()-scoreLabel.getHeight());
+        stage.addActor(scoreLabel);*/
     }
 
 
@@ -52,7 +67,7 @@ public class GameScreen implements Screen {
 
     private void initBucket() {
         //bucket
-        collector = new GarbageCollector(GarbageType.PAPER);
+        collector = new GarbageCollectorActor(GarbageType.PAPER);
         float density = Gdx.graphics.getDensity();
         collector.setSize(50f * density, 50f * density);
         collector.setX(Gdx.graphics.getWidth() / 2 - collector.getWidth() / 2);

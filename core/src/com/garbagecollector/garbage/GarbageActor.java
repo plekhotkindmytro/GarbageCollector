@@ -5,15 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.garbagecollector.GarbageCollector;
-
-import java.util.Random;
+import com.garbagecollector.screens.game.GarbageCollectorActor;
 
 /**
  * Created by dmytroplekhotkin on 10/12/14.
@@ -58,8 +53,8 @@ public class GarbageActor extends Actor{
     }
 
     private boolean detectCollision() {
-        GarbageCollector bucket = getStage().getRoot().findActor(GarbageCollector.NAME);
-        boolean inBucketX =  getX() > bucket.getX()  &&  getRight() < bucket.getRight();
+        GarbageCollectorActor bucket = getStage().getRoot().findActor(GarbageCollectorActor.NAME);
+        boolean inBucketX =  !(getX() > bucket.getRight()  ||  getRight() < bucket.getX());
         if (bucket.getTop() >= getY() && inBucketX){
             System.out.println("collision!");
             return true;
