@@ -18,14 +18,17 @@ public class GarbageActor extends Actor{
     public static final int SPEED = 200;
     public static final int HEAP_SPEED = 20;
     TextureRegion texture;
-//    final GarbageType type;
+    private final GarbageType type;
+
 
     public GarbageActor() {
-
-
-//        type = GarbageType.randomGarbage();
-        texture = new TextureRegion(new Texture(Gdx.files.internal(GarbageType.randomGarbage())));
+        type = GarbageType.randomGarbage();
+        texture = new TextureRegion(new Texture(Gdx.files.internal(GarbageType.randomImageByType(type))));
         setSize(texture.getRegionWidth()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
+    }
+
+    public GarbageType getGarbageType() {
+        return type;
     }
 
     @Override

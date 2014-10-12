@@ -24,12 +24,12 @@ public enum GarbageType {
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
-    public static String randomGarbage()  {
+    public static GarbageType randomGarbage()  {
         final GarbageType garbageType = VALUES.get(RANDOM.nextInt(SIZE));
-        return randomImageByType(garbageType);
+        return garbageType;
     }
 
-    private static String randomImageByType(GarbageType garbageType)  {
+    public static String randomImageByType(GarbageType garbageType)  {
         final int imageIndex = RANDOM.nextInt(garbageType.images.length);
         return garbageType.images[imageIndex];
     }

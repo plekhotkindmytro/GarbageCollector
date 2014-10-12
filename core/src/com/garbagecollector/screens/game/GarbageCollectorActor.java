@@ -27,7 +27,26 @@ public class GarbageCollectorActor extends Actor {
 
     public GarbageCollectorActor(GarbageType type) {
         this.type = type;
-        Texture texture = new Texture(Gdx.files.internal("bucket_yellow.png"));
+        String image;
+        switch (type) {
+            case PAPER:
+            image = "bucket_blue.png";
+                break;
+            case DANGER:
+            case PLASTICS:
+            image = "bucket_red.png";
+                break;
+            case OTHER:
+                image = "bucket_yellow.png";
+                break;
+            case CAT:
+                image = "bucket_green.png";
+                break;
+            default:
+                image = "bucket_yellow.png";
+                break;
+        }
+        Texture texture = new Texture(Gdx.files.internal(image));
         bucketImage = new TextureRegion(texture);
         setName(NAME);
     }
