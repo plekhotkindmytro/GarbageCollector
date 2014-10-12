@@ -24,6 +24,7 @@ public class GameScreen implements Screen {
     final EcoGarbageCollector game;
 
     private BackgroundActor backgroundActor;
+    private GarbageHeapActor garbageHeapActor;
 
     private Stage stage;
     private GarbageCollector collector;
@@ -35,7 +36,7 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         initBackground();
-
+        initGarbageHeap();
         initBucket();
     }
 
@@ -44,6 +45,11 @@ public class GameScreen implements Screen {
         //adding background
         backgroundActor = new BackgroundActor();
         stage.addActor(backgroundActor);
+    }
+
+    private void initGarbageHeap() {
+        garbageHeapActor = new GarbageHeapActor();
+        stage.addActor(garbageHeapActor);
     }
 
     private void initBucket() {

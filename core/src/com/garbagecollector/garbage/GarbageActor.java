@@ -37,6 +37,7 @@ public class GarbageActor extends Actor{
         batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
+
     @Override
     public void act(float delta) {
         super.act(delta);

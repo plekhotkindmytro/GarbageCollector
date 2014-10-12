@@ -11,6 +11,8 @@ import java.util.Random;
 public enum GarbageType {
     PAPER("p1.png", "p2.png","p3.png", "p4.png"),
     PLASTICS("pl1.png", "pl2.png","pl3.png"),
+    CAT("cat1.png","cat2.png","cat3.png","cat4.png"),
+    OTHER("o1.png","o2.png","o3.png"),
     DANGER("d1.png");
 
     private final String[] images;
