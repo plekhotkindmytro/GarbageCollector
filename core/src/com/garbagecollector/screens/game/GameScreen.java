@@ -27,13 +27,7 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         initBackground();
-
-
         initBucket();
-
-
-
-
     }
 
     private void initBackground() {

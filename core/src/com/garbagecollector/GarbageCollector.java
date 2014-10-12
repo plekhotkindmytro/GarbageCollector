@@ -6,13 +6,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * @author Alexander Semenov
  */
 public class GarbageCollector extends Actor {
 
+    public static final float ACCELERATION_MULTIPLIER = 8f;
     private TextureRegion bucketImage;
     private GarbageType type;
 
@@ -36,18 +39,20 @@ public class GarbageCollector extends Actor {
 
     @Override
     public void act(float delta) {
-        super.act(delta);
         boolean isPortrait = Gdx.graphics.getHeight() > Gdx.graphics.getWidth();
         float accelerometerDelta = isPortrait ? Gdx.input.getAccelerometerX(): Gdx.input.getAccelerometerY();
-        System.out.println("accelerometerX:  " + accelerometerDelta+", isPortrait "+isPortrait);
+        System.out.println("accelerometerX:  " + accelerometerDelta+", delta: "+delta);
         //calculating new position of bucket
-        float posDelta = accelerometerDelta * 6f * Gdx.graphics.getDensity();
+        float posDelta = accelerometerDelta * Gdx.graphics.getDensity();
         float newPos = isPortrait?(getX() - posDelta): (getX() + posDelta);
         float maxPoint = getStage().getWidth() - getWidth();
 
         //preventing move of bucket outside screen
-        if (newPos < 0) setX(0);
-        else if (newPos > maxPoint) setX(maxPoint);
-        else setX(newPos);
+        if (newPos < 0) newPos = 0;
+        else if (newPos > maxPoint) newPos = maxPoint;
+
+        addAction(Actions.moveTo(newPos, 0, delta* ACCELERATION_MULTIPLIER, Interpolation.bounce));
+
+        super.act(delta);
     }
 }
