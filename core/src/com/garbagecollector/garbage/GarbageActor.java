@@ -21,7 +21,7 @@ public class GarbageActor extends Actor{
 
 
     public static final int SPEED = 200;
-    public static final int HEAP_SPEED = 200;
+    public static final int HEAP_SPEED = 50;
     TextureRegion texture;
     private final GarbageType type;
 
@@ -78,6 +78,9 @@ public class GarbageActor extends Actor{
                 fatality.addAction(Actions.sequence( Actions.fadeOut(0.5f)));
                 ((FatalityActor)fatality).playMusic();
             }
+
+            GarbageCollectorActor actor = getStage().getRoot().findActor(GarbageCollectorActor.NAME);
+            actor.onCatchGarbage(this);
 
             remove();
         } else moveDown();
