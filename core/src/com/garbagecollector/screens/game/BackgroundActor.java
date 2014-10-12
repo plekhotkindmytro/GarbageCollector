@@ -18,7 +18,7 @@ public class BackgroundActor extends Actor {
 
     private static final Random random = new Random();
     public BackgroundActor() {
-        texture = new TextureRegion(new Texture(Gdx.files.internal("city"+(1+random.nextInt(CITY_COUNT))+".jpg")));
+        texture = new TextureRegion(new Texture(Gdx.files.internal("city3.jpg")));
     }
 
     @Override
