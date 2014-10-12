@@ -66,6 +66,8 @@ public class GameScreen implements Screen {
             stage.addActor(actor);
             actor.setPosition(MathUtils.random(0, stage.getWidth() - actor.getWidth()), stage.getHeight());
             lastDropTime = TimeUtils.millis();
+            //moving collector to front
+            stage.getRoot().swapActor(actor, collector);
         }
 
 
