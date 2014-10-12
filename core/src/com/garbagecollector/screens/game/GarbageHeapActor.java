@@ -52,6 +52,6 @@ public class GarbageHeapActor extends Actor {
     }
 
     private boolean detectOverflow() {
-        return getStage().getHeight() - getTop()*getScaleY() < 200 * Gdx.graphics.getDensity();
+        return getStage().getHeight() - getTop()*getScaleY() < 300 * Gdx.graphics.getDensity();
     }
 }

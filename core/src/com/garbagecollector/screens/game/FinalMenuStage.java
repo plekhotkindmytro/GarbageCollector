@@ -36,7 +36,7 @@ public class FinalMenuStage extends Stage {
     public void init(){
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = new BitmapFont();
-        scoreLabel = new Label("City fall in garbage :) ", style);
+        scoreLabel = new Label("City drown in garbage :) ", style);
         scoreLabel.setWidth(getWidth() - getWidth() / 10);
         scoreLabel.setFontScale(2f * Gdx.graphics.getDensity());
         scoreLabel.setScale(2f * Gdx.graphics.getDensity());
