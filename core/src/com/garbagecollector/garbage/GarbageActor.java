@@ -75,6 +75,7 @@ public class GarbageActor extends Actor{
                 } else {
 
                 }
+
                 fatality.addAction(Actions.sequence( Actions.fadeOut(0.5f)));
                 ((FatalityActor)fatality).playMusic();
             }
