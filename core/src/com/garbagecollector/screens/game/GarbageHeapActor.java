@@ -1,6 +1,7 @@
 package com.garbagecollector.screens.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,14 +19,27 @@ public class GarbageHeapActor extends Actor {
     public GarbageHeapActor() {
         texture = new TextureRegion(new Texture(Gdx.files.internal("garbage.png")));
         //TODO get width from stage, not from screen
-        setSize(Gdx.graphics.getWidth(), texture.getRegionHeight());
-        setPosition(0, -texture.getRegionHeight());
+        setSize(texture.getRegionHeight()*Gdx.graphics.getDensity(), texture.getRegionHeight()*Gdx.graphics.getDensity());
+        System.out.println("Heap width: " +getWidth()+", screenWidth "+ Gdx.graphics.getWidth());
+        float scaleXY = getScale();
+        setScale(scaleXY);
+        System.out.println("scale: "+ scaleXY);
+
+        setPosition(0, -getHeight()*scaleXY);
         setName("garbageHeap");
+    }
+
+    private float getScale() {
+            int screenWidth = Gdx.graphics.getWidth();
+        return (screenWidth/getWidth());
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        Color color = getColor();
+        batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+        batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(),
+                getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 
     @Override
