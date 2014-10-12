@@ -17,7 +17,9 @@ public class GarbageHeapActor extends Actor {
     private int position;
     public GarbageHeapActor() {
         texture = new TextureRegion(new Texture(Gdx.files.internal("garbage.png")));
-        position = -texture.getRegionHeight();
+        setSize(texture.getRegionWidth(), texture.getRegionHeight());
+        setPosition(0, -texture.getRegionHeight());
+        setName("garbageHeap");
     }
 
     @Override
@@ -28,6 +30,5 @@ public class GarbageHeapActor extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        addAction(Actions.moveBy(0, position));
     }
 }

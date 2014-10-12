@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.garbagecollector.GarbageCollector;
@@ -20,6 +21,7 @@ import java.util.Random;
 public class GarbageActor extends Actor{
 
     public static final int SPEED = 200;
+    public static final int HEAP_SPEED = 20;
     TextureRegion texture;
 //    final GarbageType type;
 
@@ -43,8 +45,13 @@ public class GarbageActor extends Actor{
     public void act(float delta) {
         super.act(delta);
         if (detectFall()){
+            Group root = getStage().getRoot();
+            Actor actor = root.findActor("garbageHeap");
+            actor.addAction(Actions.moveBy(0, HEAP_SPEED,1));
+
             remove();
             System.out.println("Removing garbage: " + this);
+
         } else if(detectCollision()) {
             remove();
         } else moveDown();

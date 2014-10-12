@@ -14,7 +14,7 @@ public class BackgroundActor extends Actor {
     TextureRegion texture;
 
     public BackgroundActor() {
-        texture = new TextureRegion(new Texture(Gdx.files.internal("city5.jpg")));
+        texture = new TextureRegion(new Texture(Gdx.files.internal("city4.jpg")));
     }
 
     @Override
