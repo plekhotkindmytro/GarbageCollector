@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  */
 public class GarbageHeapActor extends Actor {
 
+    //limit to overflow garbage, should be >0 and <1
+    public static final float OVERFLOW_LIMIT = 0.5f; // 50%
     TextureRegion texture;
 
     private int position;
@@ -53,7 +55,6 @@ public class GarbageHeapActor extends Actor {
     }
 
     private boolean detectOverflow() {
-        int finish = Gdx.app.getType() == Application.ApplicationType.iOS? 100 : 300;
-        return getStage().getHeight() - getTop()*getScaleY() < finish * Gdx.graphics.getDensity();
+        return getTop()*getScaleY() > getStage().getHeight() * OVERFLOW_LIMIT;
     }
 }

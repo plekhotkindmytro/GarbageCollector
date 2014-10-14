@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.garbagecollector.garbage.GarbageActor;
-import com.garbagecollector.garbage.GarbageType;
+import com.garbagecollector.screens.game.garbage.GarbageActor;
+import com.garbagecollector.screens.game.garbage.GarbageType;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**

@@ -1,4 +1,4 @@
-package com.garbagecollector.garbage;
+package com.garbagecollector.screens.game.garbage;
 
 /**
  * Created by dmytroplekhotkin on 10/12/14.

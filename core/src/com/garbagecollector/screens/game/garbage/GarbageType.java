@@ -1,4 +1,4 @@
-package com.garbagecollector.garbage;
+package com.garbagecollector.screens.game.garbage;
 
 import java.util.Arrays;
 import java.util.Collections;
